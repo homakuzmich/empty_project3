@@ -31,7 +31,7 @@ public class Office {
     private Long userId;
 
     @OneToMany(mappedBy = "Office",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<User> offices=new HashSet<User>();
+    private Set<User> users=new HashSet<User>();
 
     @ManyToMany(mappedBy = "offices")
     private Set<Organization> organizations=new HashSet<>();
@@ -42,14 +42,6 @@ public class Office {
 
     public void setOrganizations(Set<Organization> organizations) {
         this.organizations = organizations;
-    }
-
-    public Set<User> getOffices() {
-        return offices;
-    }
-
-    public void setOffices(Set<User> offices) {
-        this.offices = offices;
     }
 
     public Long getId() {
@@ -109,8 +101,36 @@ public class Office {
                 ", phone='" + phone + '\'' +
                 ", isActive=" + isActive +
                 ", userId=" + userId +
-                ", offices=" + offices +
+                ", users=" + users +
                 ", organizations=" + organizations +
                 '}';
     }
+
+    public Office() {
+    }
+
+    public Office(String name, String address, String phone, Boolean isActive, Long userId) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+        this.userId = userId;
+    }
+
+    public Set<User> getUsers() {
+        if (users == null) {
+            users = new HashSet<>();
+        }
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user) {
+        this.getUsers().add(user);
+    }
+
+
 }
