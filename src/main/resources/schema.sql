@@ -2,7 +2,7 @@
 -- Table `empty_project`.`User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS User (
-id               INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT  COMMENT 'Уникальный идентификатор',
+id               INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Уникальный идентификатор',
 version          INTEGER NOT NULL             COMMENT 'Служебное поле hibernate' ,
 first_name       VARCHAR(45) NOT NULL         COMMENT 'Имя',
 last_name        VARCHAR(45) NOT NULL         COMMENT 'Фамилия',
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Organization (
   is_active                     TINYINT NULL DEFAULT 1                      COMMENT 'Активен',
   Office_id                     INTEGER NOT NULL                            COMMENT 'Внешний ключ',
 
-  CONSTRAINT `fk_Organization_Office`
+  CONSTRAINT fk_Organization_Office
     FOREIGN KEY (Office_id)
     REFERENCES Office (id)
     );
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS Countries (
   FOREIGN KEY (User_id)
   REFERENCES User (id)
     );
-COMMENT ON TABLE Docs IS 'Виды стран';
+COMMENT ON TABLE Countries IS 'Виды стран';
 
 CREATE TABLE IF NOT EXISTS Organization_Office (
   Organization_id    INTEGER PRIMARY KEY NOT NULL            COMMENT 'уникальный идентификатор организации',
