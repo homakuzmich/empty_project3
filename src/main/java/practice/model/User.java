@@ -36,11 +36,11 @@ public class User {
     private Office office;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Docs_code",referencedColumnName = "code")
+    @JoinColumn(name="Docs_code") /*referencedColumnName = "code"*/
     private Docs docs;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Countries_code",referencedColumnName = "code")
+    @JoinColumn(name="Countries_code")/*referencedColumnName = "code"*/
     private Countries countries;
 
     public Office getOffice() {
