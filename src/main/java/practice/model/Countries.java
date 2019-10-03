@@ -8,6 +8,7 @@ public class Countries {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="code")
+    @Basic(fetch = FetchType.EAGER)
     private Long code;
 
     @Version
@@ -16,11 +17,10 @@ public class Countries {
     @Column(name="name",length = 45)
     private String name;
 
-    @Column(name="User_id")
+    @Column(name="User_id",insertable=false, updatable=false)
     private Integer userId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Docs_code",referencedColumnName = "code")
     private User user;
 
     public Long getCode() {

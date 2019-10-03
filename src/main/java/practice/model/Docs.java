@@ -8,6 +8,7 @@ public class Docs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="code")
+    @Basic(fetch = FetchType.EAGER)
     private Long code;
 
     @Version
@@ -19,10 +20,10 @@ public class Docs {
     @Column(name="date")
     private Date date;
 
-    @Column(name="User_Id")
+    @Column(name="User_Id",insertable = false,updatable = false)
     private Integer userId;
 
-    @OneToOne(mappedBy = "Docs")
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Long getCode() {

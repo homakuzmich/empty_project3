@@ -30,7 +30,7 @@ public class Office {
     @Column(name="User_id",nullable = false)
     private Long userId;
 
-    @OneToMany(mappedBy = "Office",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="office",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<User> users=new HashSet<User>();
 
     @ManyToMany(mappedBy = "offices")

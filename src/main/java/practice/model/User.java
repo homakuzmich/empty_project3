@@ -1,6 +1,8 @@
 package practice.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="User")
 public class User {
