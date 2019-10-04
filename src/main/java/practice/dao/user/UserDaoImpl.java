@@ -39,6 +39,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
-        em.persist(user);
+        if(null!=user) {
+            em.persist(user);
+        }
     }
 }

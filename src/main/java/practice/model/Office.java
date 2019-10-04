@@ -27,7 +27,7 @@ public class Office {
     @Column(name="is_active")
     private Boolean isActive;
 
-    @Column(name="User_id",nullable = false)
+    @Column(name="User_id")
     private Long userId;
 
     @OneToMany(mappedBy="office",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
@@ -37,6 +37,9 @@ public class Office {
     private Set<Organization> organizations=new HashSet<>();
 
     public Set<Organization> getOrganizations() {
+        if (organizations == null) {
+            organizations = new HashSet<>();
+        }
         return organizations;
     }
 

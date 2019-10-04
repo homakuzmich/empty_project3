@@ -34,7 +34,7 @@ public class User {
     private Boolean isIdentified;
 
     @ManyToOne
-    @JoinColumn(name="office_id",nullable = false)
+    @JoinColumn(name="office_id")
     private Office office;
     
     @OneToOne(cascade = CascadeType.ALL)

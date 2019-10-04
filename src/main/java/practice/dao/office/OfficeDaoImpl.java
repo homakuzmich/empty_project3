@@ -38,15 +38,8 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public Office save(Office office) {
-        if(office.getId()== null){
-            em.persist(office);
+    public void save(Office office) {
+        em.persist(office);
         }
-        else{
-            em.merge(office);
-        }
-
-        return office;
 
     }
-}

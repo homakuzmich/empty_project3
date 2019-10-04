@@ -50,6 +50,9 @@ public class Organization {
     private Set<Office> offices=new HashSet<>();
 
     public Set<Office> getOffices() {
+        if (offices == null) {
+            offices = new HashSet<>();
+        }
         return offices;
     }
 
@@ -127,6 +130,29 @@ public class Organization {
 
     public void setOfficeId(Long officeId) {
         this.officeId = officeId;
+    }
+
+    public Organization() {
+    }
+
+    public Organization(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public void addOffice(Office office) {
+        getOffices().add(office);
+        office.getOrganizations().add(this);
+    }
+
+    public void removeOffice(Office office) {
+        getOffices().remove(office);
+        office.getOrganizations().remove(this);
     }
 
     @Override

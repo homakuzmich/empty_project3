@@ -38,14 +38,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public Organization save(Organization organization) {
-        if(organization.getId()== null){
-            em.persist(organization);
-        }
-        else{
-            em.merge(organization);
-        }
-
-        return organization;
+    public void save(Organization organization) {
+        em.persist(organization);
     }
 }
