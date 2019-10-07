@@ -24,7 +24,7 @@ public class User {
     @Column(name="middle_name",length = 45)
     private String middleName;
 
-    @Column(name="position",length = 45)
+    @Column(name="position",length = 45,nullable = false)
     private String position;
 
     @Column(name="phone",length = 45)
@@ -139,5 +139,13 @@ public class User {
                 ", docs=" + docs +
                 ", countries=" + countries +
                 '}';
+    }
+
+    public User() {
+    }
+
+    public User(String firstName, String position) {
+        this.firstName = firstName;
+        this.position = position;
     }
 }
