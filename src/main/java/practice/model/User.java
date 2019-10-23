@@ -40,16 +40,16 @@ public class User {
     @JoinColumn(name="office_id")
     private Office office;
     
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name="Docs")
-    @PrimaryKeyJoinColumn(name="code")
-    @JoinColumn(name="code",insertable = false, updatable = false) /*referencedColumnName = "code"*/
+    @PrimaryKeyJoinColumn(name="id")
+    @JoinColumn(name="id",insertable = false, updatable = false) /*referencedColumnName = "code"*/
     private Docs docs;
 
-    @OneToOne(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(name="Countries")
-    @PrimaryKeyJoinColumn(name="code")
-    @JoinColumn(name="code",insertable = false,updatable = false)/*referencedColumnName = "code"*/
+    @PrimaryKeyJoinColumn(name="id")
+    @JoinColumn(name="id",insertable = false,updatable = false)/*referencedColumnName = "code"*/
     private Countries countries;
 
     public Office getOffice() {

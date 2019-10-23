@@ -22,7 +22,7 @@ public class Docs {
     private Date date;
 
     @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    @MapsId
+    @JoinColumn(name="code")
     private User user;
 
     public Docs(@Size(max = 45) String name, String date) {

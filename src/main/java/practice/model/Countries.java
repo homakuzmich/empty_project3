@@ -17,8 +17,8 @@ public class Countries {
     @Column(name="name",length = 45)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @MapsId
+    @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @JoinColumn(name="code")
     private User user;
 
     public Countries(@Size(max = 45) String name) {

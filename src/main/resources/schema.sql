@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS Organization_Office (
 COMMENT ON TABLE Organization_Office IS 'join-таблица для связи организации и офиса';
 
 CREATE TABLE IF NOT EXISTS Docs (
-  code          INTEGER NOT NULL                               COMMENT 'Уникальный идентификатор',
+  code         INTEGER NOT NULL                               COMMENT 'Уникальный идентификатор',
   version       INTEGER NOT NULL                               COMMENT 'Служебное поле hibernate',
   name          VARCHAR(45) NULL                               COMMENT 'Наименование документа',
   date          DATE NULL                                      COMMENT 'Дата создания документа',
@@ -61,7 +61,7 @@ PRIMARY KEY (code),FOREIGN KEY(code) REFERENCES "USER"(id)
 COMMENT ON TABLE Docs IS 'Виды документов';
 
 CREATE TABLE IF NOT EXISTS Countries (
-  code           INTEGER NOT NULL                            COMMENT 'Уникальный идентификатор',
+  code          INTEGER NOT NULL                            COMMENT 'Уникальный идентификатор',
   version        INTEGER NOT NULL                            COMMENT 'Служебное поле hibernate',
   name           VARCHAR(45) NOT NULL                        COMMENT 'Название государства',
 PRIMARY KEY (code),FOREIGN KEY(code) REFERENCES "USER"(id)
