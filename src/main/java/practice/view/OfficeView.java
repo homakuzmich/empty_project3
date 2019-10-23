@@ -14,7 +14,7 @@ public class OfficeView {
     public String id;
 
     @Size(max = 100)
-    @NotEmpty(message = "firstname cannot be null")
+    @NotEmpty(message = "firstName cannot be null")
     @ApiModelProperty(value = "Название", example = "Иван")
     public String name;
 
@@ -30,9 +30,6 @@ public class OfficeView {
     @ApiModelProperty(value = "Активен",example="true")
     public Boolean isActive;
 
-    @ApiModelProperty(value = "Id пользователя", example = "1",hidden = true)
-    public String userId;
-
     @Override
     public String toString() {
         return "OfficeView{" +
@@ -41,7 +38,6 @@ public class OfficeView {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isActive=" + isActive +
-                ", userId='" + userId + '\'' +
                 '}';
     }
 }

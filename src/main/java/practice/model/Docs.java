@@ -1,14 +1,15 @@
 package practice.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity(name="Docs")
 public class Docs {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="code")
-    @Basic(fetch = FetchType.EAGER)
     private Long code;
 
     @Version
@@ -20,11 +21,15 @@ public class Docs {
     @Column(name="date")
     private Date date;
 
-    @Column(name="User_Id",insertable = false,updatable = false)
-    private Integer userId;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @MapsId
     private User user;
+
+    public Docs(@Size(max = 45) String name, String date) {
+    }
+
+    public Docs(String name, String date, String userId) {
+    }
 
     public Long getCode() {
         return code;
@@ -50,14 +55,6 @@ public class Docs {
         this.date = date;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public User getUser() {
         return user;
     }
@@ -66,13 +63,15 @@ public class Docs {
         this.user = user;
     }
 
+    public Docs() {
+    }
+
     @Override
     public String toString() {
         return "Docs{" +
                 "code=" + code +
                 ", name='" + name + '\'' +
                 ", date=" + date +
-                ", userId=" + userId +
                 ", user=" + user +
                 '}';
     }

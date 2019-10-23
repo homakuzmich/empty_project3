@@ -36,9 +36,6 @@ public class Organization {
     @Column(name="is_active")
     private Boolean isActive;
 
-    @Column(name="Office_id",nullable = false)
-    private Long officeId;
-
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -124,14 +121,6 @@ public class Organization {
         isActive = active;
     }
 
-    public Long getOfficeId() {
-        return officeId;
-    }
-
-    public void setOfficeId(Long officeId) {
-        this.officeId = officeId;
-    }
-
     public Organization() {
     }
 
@@ -166,7 +155,6 @@ public class Organization {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isActive=" + isActive +
-                ", officeId=" + officeId +
                 ", offices=" + offices +
                 '}';
     }

@@ -1,3 +1,5 @@
+package dao;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +36,6 @@ public class OfficeDaoTest {
         office.setId(1L);
         office.setName("Бизнес-центр Дружба");
         office.setAddress("Москва,ул. Новослободская, 6");
-        office.setUserId(2L);
         Organization organization=new Organization("Жуки","ОАО Жуки","7723991101","772001001","Москва.ул. Золотая, 28","(495)242-0100",true);
         organization.addOffice(office);
         office.setOrganizations(list);

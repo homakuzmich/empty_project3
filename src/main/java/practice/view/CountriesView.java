@@ -17,15 +17,11 @@ public class CountriesView {
     @ApiModelProperty(value = "Название страны", example = "Нидерланды")
     public String name;
 
-    @ApiModelProperty(value = "Уникальный идентификатор пользователя", hidden = true, example = "1")
-    public String userId;
-
     @Override
     public String toString() {
         return "CountriesView{" +
-                "code='" + code + '\'' +
+                "id='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", userId='" + userId + '\'' +
                 '}';
     }
 }

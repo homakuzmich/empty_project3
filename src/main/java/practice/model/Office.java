@@ -1,6 +1,8 @@
 package practice.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,9 +28,6 @@ public class Office {
 
     @Column(name="is_active")
     private Boolean isActive;
-
-    @Column(name="User_id")
-    private Long userId;
 
     @OneToMany(mappedBy="office",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<User> users=new HashSet<User>();
@@ -87,14 +86,6 @@ public class Office {
         isActive = active;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     @Override
     public String toString() {
         return "Office{" +
@@ -103,7 +94,6 @@ public class Office {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isActive=" + isActive +
-                ", userId=" + userId +
                 ", users=" + users +
                 ", organizations=" + organizations +
                 '}';
@@ -112,12 +102,11 @@ public class Office {
     public Office() {
     }
 
-    public Office(String name, String address, String phone, Boolean isActive, Long userId) {
+    public Office(String name, String address, String phone, Boolean isActive) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
-        this.userId = userId;
     }
 
     public Set<User> getUsers() {

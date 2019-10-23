@@ -1,15 +1,15 @@
 package practice.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity(name="User")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name="id")
     private Long id;
 
     @Version
@@ -33,16 +33,23 @@ public class User {
     @Column(name="is_identified")
     private Boolean isIdentified;
 
+    @Column(name="office_id",insertable = false,updatable = false)
+    private Integer officeId;
+
     @ManyToOne
     @JoinColumn(name="office_id")
     private Office office;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Docs_code") /*referencedColumnName = "code"*/
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name="Docs")
+    @PrimaryKeyJoinColumn(name="code")
+    @JoinColumn(name="code",insertable = false, updatable = false) /*referencedColumnName = "code"*/
     private Docs docs;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Countries_code")/*referencedColumnName = "code"*/
+    @OneToOne(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinTable(name="Countries")
+    @PrimaryKeyJoinColumn(name="code")
+    @JoinColumn(name="code",insertable = false,updatable = false)/*referencedColumnName = "code"*/
     private Countries countries;
 
     public Office getOffice() {
@@ -125,6 +132,14 @@ public class User {
         this.countries = countries;
     }
 
+    public Integer getOfficeId() {
+        return officeId;
+    }
+
+    public void setOfficeId(Integer officeId) {
+        this.officeId = officeId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -135,10 +150,14 @@ public class User {
                 ", position='" + position + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isIdentified=" + isIdentified +
+                ", officeId=" + officeId +
                 ", office=" + office +
                 ", docs=" + docs +
                 ", countries=" + countries +
                 '}';
+    }
+
+    public User(@Size(max = 45) @NotEmpty(message = "firstName cannot be null") String firstName, @Size(max = 45) String lastName, @Size(max = 45) String middleName, @Size(max = 45) @NotEmpty(message = "position cannot be null") String position, @Size(max = 45) String phone, Boolean isIdentified) {
     }
 
     public User() {

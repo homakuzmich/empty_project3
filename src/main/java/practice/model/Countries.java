@@ -1,14 +1,14 @@
 package practice.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity(name="Countries")
 public class Countries {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="code")
-    @Basic(fetch = FetchType.EAGER)
     private Long code;
 
     @Version
@@ -17,11 +17,15 @@ public class Countries {
     @Column(name="name",length = 45)
     private String name;
 
-    @Column(name="User_id",insertable=false, updatable=false)
-    private Integer userId;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @MapsId
     private User user;
+
+    public Countries(@Size(max = 45) String name) {
+    }
+
+    public Countries(String name, String userId) {
+    }
 
     public Long getCode() {
         return code;
@@ -39,14 +43,6 @@ public class Countries {
         this.name = name;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public User getUser() {
         return user;
     }
@@ -55,12 +51,14 @@ public class Countries {
         this.user = user;
     }
 
+    public Countries() {
+    }
+
     @Override
     public String toString() {
         return "Countries{" +
                 "code=" + code +
                 ", name='" + name + '\'' +
-                ", userId=" + userId +
                 ", user=" + user +
                 '}';
     }

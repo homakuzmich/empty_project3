@@ -17,7 +17,7 @@ public class OrganizationView {
     @Size(max = 45)
     public String name;
 
-    @NotEmpty(message = "fullname cannot be null")
+    @NotEmpty(message = "fullName cannot be null")
     @Size(max = 100)
     public String fullName;
 
@@ -39,9 +39,6 @@ public class OrganizationView {
     @ApiModelProperty(value = "Активен",example="true")
     public Boolean isActive;
 
-    @ApiModelProperty(value = "Уникальный идентификатор офиса", hidden = true, example = "1")
-    public String officeId;
-
     @Override
     public String toString() {
         return "OrganizationView{" +
@@ -53,7 +50,6 @@ public class OrganizationView {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isActive=" + isActive +
-                ", officeId='" + officeId + '\'' +
                 '}';
     }
 }

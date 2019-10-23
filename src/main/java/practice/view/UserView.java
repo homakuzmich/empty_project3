@@ -14,7 +14,7 @@ public class UserView {
     public String id;
 
     @Size(max = 45)
-    @NotEmpty(message = "firstname cannot be null")
+    @NotEmpty(message = "firstName cannot be null")
     @ApiModelProperty(value = "Имя", example = "Иван")
     public String firstName;
 
@@ -38,6 +38,9 @@ public class UserView {
     @ApiModelProperty(value = "Идентифицирован")
     public Boolean isIdentified;
 
+    @ApiModelProperty(value="Уникальный идентификатор офиса",example = "1")
+    public String officeId;
+
     @Override
     public String toString() {
         return "UserView{" +
@@ -48,6 +51,7 @@ public class UserView {
                 ", position='" + position + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isIdentified=" + isIdentified +
+                ", officeId='" + officeId + '\'' +
                 '}';
     }
 }

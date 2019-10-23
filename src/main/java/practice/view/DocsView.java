@@ -19,16 +19,12 @@ public class DocsView {
     @ApiModelProperty(value = "Дата", example = "2016-08-17")
     public String date;
 
-    @ApiModelProperty(value = "Уникальный идентификатор пользователя", example = "1", hidden = true)
-    public String userId;
-
     @Override
     public String toString() {
         return "DocsView{" +
-                "code='" + code + '\'' +
+                "id='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", date='" + date + '\'' +
-                ", userId='" + userId + '\'' +
                 '}';
     }
 }

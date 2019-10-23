@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> all() {
-        TypedQuery<User> query=em.createQuery("SELECT u FROM User u", User.class);
+        TypedQuery<User> query=em.createQuery("SELECT u FROM User u",User.class);
         return query.getResultList();
     }
 
@@ -39,8 +39,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
-        if(null!=user) {
-            em.persist(user);
-        }
+        em.persist(user);
     }
 }
