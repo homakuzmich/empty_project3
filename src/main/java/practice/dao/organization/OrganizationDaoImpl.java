@@ -31,10 +31,22 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public void update(Organization organization) {
-        Query query=em.createQuery("UPDATE Organization SET id=?, name=?, fullName=?, inn=?, kpp=?, address=?" +
-                "WHERE id=? AND version=?");
-        query.executeUpdate();
+    public long update(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+        Organization o = em.find(Organization.class, id);
+        if (o == null) {
+            return 0;
+        }
+        o.setId(id);
+        o.setName(name);
+        o.setFullName(fullName);
+        o.setInn(inn);
+        o.setKpp(kpp);
+        o.setAddress(address);
+        o.setPhone(phone);
+        o.setActive(isActive);
+
+        em.flush();
+        return 1;
     }
 
     @Override

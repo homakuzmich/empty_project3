@@ -19,24 +19,43 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CountriesController {
     private final CountriesService countriesService;
 
+
     @Autowired
     public CountriesController(CountriesService countriesService) {
         this.countriesService = countriesService;
     }
+
 
     @ApiOperation(value = "Добавить новую страну проживания", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/countries")
+    @PostMapping(path = "/countries", consumes = "application/json", produces = "application/json")
     public void countriesAdd(@RequestBody CountriesView country){
-        countriesService.add(country);
+        countriesService.addAndSave(country);
     }
 
     @ApiOperation(value = "Получить список всех стран", httpMethod = "GET")
-    @GetMapping("/countries")
+    @GetMapping("/countries/list")
     public List<CountriesView> list(){
         return countriesService.countries();
     }
+
+    @ApiOperation(value = "Загрузить по id", httpMethod = "GET")
+    @GetMapping("/countries/{id}")
+    public CountriesView loadById(CountriesView country, @PathVariable Long id) {
+        return countriesService.loadById(country, id);
+    }
+
+    @ApiOperation(value = "Обновить информацию о стране", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    @PostMapping(path = "/countries/{id}/update", consumes = "application/json", produces = "application/json")
+    public void countriesUpdate(@RequestBody CountriesView country) {
+        countriesService.update(country);
+    }
+
 }

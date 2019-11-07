@@ -29,14 +29,30 @@ public class UserController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/user")
+    @PostMapping(path = "/user", consumes = "application/json", produces = "application/json")
     public void userAdd(@RequestBody UserView user){
-        userService.add(user);
+        userService.addAndSave(user);
     }
 
     @ApiOperation(value = "Получить список всех людей", httpMethod = "GET")
-    @GetMapping("/user")
+    @GetMapping("/user/list")
     public List<UserView> list() {
         return userService.users();
+    }
+
+    @ApiOperation(value = "Загрузить по id", httpMethod = "GET")
+    @GetMapping("/user/{id}")
+    public UserView loadById(UserView user, @PathVariable Long id) {
+        return userService.loadById(user, id);
+    }
+
+    @ApiOperation(value = "Обновить информацию о пользователе", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    @PostMapping(path = "/user/{id}/update", consumes = "application/json", produces = "application/json")
+    public void userUpdate(@RequestBody UserView user) {
+        userService.update(user);
     }
 }

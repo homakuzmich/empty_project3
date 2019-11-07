@@ -8,6 +8,7 @@ import practice.model.Countries;
 import practice.model.mapper.MapperFacade;
 import practice.view.CountriesView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -24,8 +25,8 @@ public class CountriesServiceImpl implements CountriesService {
 
     @Override
     @Transactional
-    public void add(CountriesView view) {
-        Countries country= new Countries(view.name);
+    public void addAndSave(CountriesView view) {
+        Countries country = new Countries(view.code, view.name);
         dao.save(country);
     }
 
@@ -34,5 +35,19 @@ public class CountriesServiceImpl implements CountriesService {
     public List<CountriesView> countries() {
         List<Countries> all=dao.all();
         return mapperFacade.mapAsList(all, CountriesView.class);
+    }
+
+    @Override
+    @Transactional
+    public void update(CountriesView view) {
+        dao.update(view.code, view.name);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public CountriesView loadById(CountriesView view, Long id) {
+        Countries country = dao.loadById(id);
+        return mapperFacade.map(country, CountriesView.class);
     }
 }

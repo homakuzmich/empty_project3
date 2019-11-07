@@ -8,7 +8,11 @@ import java.util.List;
 
 @Validated
 public interface CountriesService {
-    void add(@Valid CountriesView country);
+    void addAndSave(/*@Valid*/ CountriesView country);
 
     List<CountriesView> countries();
+
+    void update(@Valid CountriesView country);
+
+    CountriesView loadById(CountriesView country, Long id);
 }

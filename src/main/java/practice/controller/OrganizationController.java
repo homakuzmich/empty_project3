@@ -26,17 +26,33 @@ public class OrganizationController {
 
     @ApiOperation(value = "Добавить новую компанию", httpMethod = "POST")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 200, message = "Success", response = Long.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/organization")
+    @PostMapping(path = "/organization", consumes = "application/json", produces = "application/json")
     public void organizationAdd(@RequestBody OrganizationView organization){
-        organizationService.add(organization);
+        organizationService.addAndSave(organization);
     }
 
     @ApiOperation(value = "Получить список всех компаний", httpMethod = "GET")
-    @GetMapping("/organization")
+    @GetMapping("/organization/list")
     public List<OrganizationView> list(){
         return organizationService.organizations();
+    }
+
+    @ApiOperation(value = "Загрузить по id", httpMethod = "GET")
+    @GetMapping("/organization/{id}")
+    public OrganizationView loadById(OrganizationView organization, @PathVariable Long id) {
+        return organizationService.loadById(organization, id);
+    }
+
+    @ApiOperation(value = "Обновить информацию об организации", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    @PostMapping(path = "/organization/{id}/update", consumes = "application/json", produces = "application/json")
+    public void organizationUpdate(@RequestBody OrganizationView organization) {
+        organizationService.update(organization);
     }
 }

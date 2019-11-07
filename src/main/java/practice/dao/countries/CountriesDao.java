@@ -9,7 +9,7 @@ public interface CountriesDao {
 
     Countries loadById(Long code);
 
-    void update(Countries country);
+    long update(Long code, String name);
 
     void save(Countries country);
 }

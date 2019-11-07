@@ -28,7 +28,7 @@ public class Docs {
     public Docs(@Size(max = 45) String name, String date) {
     }
 
-    public Docs(String name, String date, String userId) {
+    public Docs() {
     }
 
     public Long getCode() {
@@ -63,7 +63,7 @@ public class Docs {
         this.user = user;
     }
 
-    public Docs() {
+    public Docs(Long code, @Size(max = 45) String name, Date date) {
     }
 
     @Override

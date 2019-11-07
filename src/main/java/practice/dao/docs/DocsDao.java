@@ -2,6 +2,7 @@ package practice.dao.docs;
 
 import practice.model.Docs;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DocsDao {
@@ -9,7 +10,7 @@ public interface DocsDao {
 
     Docs loadById(Long id);
 
-    void update(Docs document);
+    long update(Long code, String name, Date date);
 
     void save(Docs document);
 }

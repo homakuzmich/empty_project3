@@ -26,17 +26,34 @@ public class OfficeController {
 
     @ApiOperation(value = "Добавить новый офис", httpMethod = "POST")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 200, message = "Success" /*response = Long.class*/),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/office")
+    @PostMapping(path = "/office", consumes = "application/json", produces = "application/json")
     public void officeAdd(@RequestBody OfficeView office){
-        officeService.add(office);
+        officeService.addAndSave(office);
     }
 
     @ApiOperation(value = "Получить список всех офисов", httpMethod = "GET")
-    @GetMapping("/office")
+    @GetMapping("/office/list")
     public List<OfficeView> list(){
         return officeService.offices();
     }
+
+    @ApiOperation(value = "Загрузить по id", httpMethod = "GET")
+    @GetMapping("/office/{id}")
+    public OfficeView loadById(OfficeView office, @PathVariable Long id) {
+        return officeService.loadById(office, id);
+    }
+
+    @ApiOperation(value = "Обновить информацию об офисе", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    @PostMapping(path = "/office/{id}/update", consumes = "application/json", produces = "application/json")
+    public void officeUpdate(@RequestBody OfficeView office) {
+        officeService.update(office);
+    }
+
 }

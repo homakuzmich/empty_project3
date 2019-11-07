@@ -9,7 +9,7 @@ public interface OfficeDao {
 
     Office loadById(Long id);
 
-    void update(Office office);
+    long update(Long id, String name, String address, String phone, Boolean isActive);
 
     void save(Office office);
 

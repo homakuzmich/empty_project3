@@ -7,16 +7,15 @@ import practice.dao.user.UserDao;
 import practice.model.User;
 import practice.model.mapper.MapperFacade;
 import practice.view.UserView;
-
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private final UserDao dao;
     private final MapperFacade mapperFacade;
 
+    @Autowired
     public UserServiceImpl(UserDao dao, MapperFacade mapperFacade) {
         this.dao = dao;
         this.mapperFacade = mapperFacade;
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void add(UserView view) {
+    public void addAndSave(UserView view) {
         User user=new User(view.firstName,view.lastName,view.middleName,view.position,view.phone,view.isIdentified);
         dao.save(user);
     }
@@ -34,5 +33,18 @@ public class UserServiceImpl implements UserService {
     public List<UserView> users() {
         List<User> all = dao.all();
         return mapperFacade.mapAsList(all, UserView.class);
+    }
+
+    @Override
+    @Transactional
+    public void update(UserView view) {
+        dao.update(view.id, view.firstName, view.lastName, view.middleName, view.position, view.phone, view.isIdentified);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserView loadById(UserView user, Long id) {
+        User useful = dao.loadById(id);
+        return mapperFacade.map(useful, UserView.class);
     }
 }

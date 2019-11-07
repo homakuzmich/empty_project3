@@ -1,11 +1,12 @@
 package practice.dao.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import practice.model.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -31,10 +32,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User user) {
-        Query query=em.createQuery("UPDATE User SET id=?, firstName=?, position=?" +
-                "WHERE id=? AND version=?");
-        query.executeUpdate();
+    public long update(Long id, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified) {
+        User u = em.find(User.class, id);
+        if (u == null) {
+            return 0;
+        }
+        u.setFirstName(firstName);
+        u.setLastName(lastName);
+        u.setMiddleName(middleName);
+        u.setPosition(position);
+        u.setPhone(phone);
+        u.setIdentified(isIdentified);
+
+        em.flush();
+        return 1;
+
     }
 
     @Override

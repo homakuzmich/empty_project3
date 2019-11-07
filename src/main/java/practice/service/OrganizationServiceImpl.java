@@ -8,6 +8,7 @@ import practice.model.Organization;
 import practice.model.mapper.MapperFacade;
 import practice.view.OrganizationView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional
-    public void add(OrganizationView view) {
+    public void addAndSave(OrganizationView view) {
         Organization organization=new Organization(view.name,view.fullName,view.inn,view.kpp,view.address,view.phone,view.isActive);
         dao.save(organization);
     }
@@ -34,5 +35,18 @@ public class OrganizationServiceImpl implements OrganizationService {
     public List<OrganizationView> organizations() {
         List<Organization> all=dao.all();
         return mapperFacade.mapAsList(all, OrganizationView.class);
+    }
+
+    @Override
+    @Transactional
+    public void update(OrganizationView view) {
+        dao.update(view.id, view.name, view.fullName, view.inn, view.kpp, view.address, view.phone, view.isActive);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public OrganizationView loadById(OrganizationView view, Long id) {
+        Organization organization = dao.loadById(id);
+        return mapperFacade.map(organization, OrganizationView.class);
     }
 }

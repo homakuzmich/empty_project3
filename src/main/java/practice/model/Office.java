@@ -109,6 +109,14 @@ public class Office {
         this.isActive = isActive;
     }
 
+    public Office(Long id, String name, String address, String phone, Boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
     public Set<User> getUsers() {
         if (users == null) {
             users = new HashSet<>();

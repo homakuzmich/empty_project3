@@ -8,7 +8,11 @@ import java.util.List;
 
 @Validated
 public interface OrganizationService {
-    void add(@Valid OrganizationView organization);
+    void addAndSave(OrganizationView organization);
 
     List<OrganizationView> organizations();
+
+    void update(@Valid OrganizationView organization);
+
+    OrganizationView loadById(OrganizationView view, Long id);
 }

@@ -7,6 +7,7 @@ import practice.model.Docs;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -32,9 +33,15 @@ public class DocsDaoImpl implements DocsDao {
     }
 
     @Override
-    public void update(Docs document) {
-        Query query= em.createQuery("UPDATE Docs SET name = ? WHERE code=? AND version=? ");
-        query.executeUpdate();
+    public long update(Long code, String name, Date date) {
+        Docs d = em.find(Docs.class, code);
+        if (d == null) {
+            return 0;
+        }
+        d.setName(name);
+        d.setDate(date);
+        em.flush();
+        return 1;
     }
 
     @Override

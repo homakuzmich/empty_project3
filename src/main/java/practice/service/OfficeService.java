@@ -8,7 +8,11 @@ import java.util.List;
 
 @Validated
 public interface OfficeService {
-    void add(@Valid OfficeView office);
+    void addAndSave(OfficeView office);
 
     List<OfficeView> offices();
+
+    void update(@Valid OfficeView office);
+
+    OfficeView loadById(OfficeView office, Long id);
 }

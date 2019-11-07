@@ -8,7 +8,11 @@ import java.util.List;
 
 @Validated
 public interface UserService {
-    void add(@Valid UserView user);
+    void addAndSave(/*@Valid*/ UserView user);
 
     List<UserView> users();
+
+    void update(@Valid UserView user);
+
+    UserView loadById(UserView user, Long id);
 }

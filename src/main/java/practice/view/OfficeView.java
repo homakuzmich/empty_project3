@@ -9,9 +9,8 @@ import javax.validation.constraints.Size;
 @ApiModel(description ="Офис" )
 public class OfficeView {
 
-    @NotEmpty
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
-    public String id;
+    public Long id;
 
     @Size(max = 100)
     @NotEmpty(message = "firstName cannot be null")
@@ -39,5 +38,43 @@ public class OfficeView {
                 ", phone='" + phone + '\'' +
                 ", isActive=" + isActive +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public OfficeView(Long id, @Size(max = 100) @NotEmpty(message = "firstName cannot be null") String name, @Size(max = 100) @NotEmpty(message = "address cannot be null") String address, @Size(max = 45) String phone, Boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public OfficeView(@Size(max = 100) @NotEmpty(message = "firstName cannot be null") String name, @Size(max = 100) @NotEmpty(message = "address cannot be null") String address, @Size(max = 45) String phone, Boolean isActive) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
+    public OfficeView() {
     }
 }

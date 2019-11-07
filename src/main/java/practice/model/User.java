@@ -15,7 +15,7 @@ public class User {
     @Version
     private Integer version;
 
-    @Column(name="first_name",length=45,nullable = false)
+    @Column(name = "first_name", length = 45/*nullable = false*/)
     private String firstName;
 
     @Column(name="last_name",length = 45)
@@ -24,7 +24,7 @@ public class User {
     @Column(name="middle_name",length = 45)
     private String middleName;
 
-    @Column(name="position",length = 45,nullable = false)
+    @Column(name = "position", length = 45/*nullable = false*/)
     private String position;
 
     @Column(name="phone",length = 45)
@@ -41,13 +41,13 @@ public class User {
     private Office office;
     
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(name="Docs")
+    //   @JoinTable(name="Docs")
     @PrimaryKeyJoinColumn(name="id")
     @JoinColumn(name="id",insertable = false, updatable = false) /*referencedColumnName = "code"*/
     private Docs docs;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinTable(name="Countries")
+//    @JoinTable(name="Countries")
     @PrimaryKeyJoinColumn(name="id")
     @JoinColumn(name="id",insertable = false,updatable = false)/*referencedColumnName = "code"*/
     private Countries countries;
@@ -160,11 +160,24 @@ public class User {
     public User(@Size(max = 45) @NotEmpty(message = "firstName cannot be null") String firstName, @Size(max = 45) String lastName, @Size(max = 45) String middleName, @Size(max = 45) @NotEmpty(message = "position cannot be null") String position, @Size(max = 45) String phone, Boolean isIdentified) {
     }
 
-    public User() {
+    public User(@Size(max = 45) @NotEmpty(message = "firstName cannot be null") String firstName, @Size(max = 45) String lastName, @Size(max = 45) String middleName, @Size(max = 45) @NotEmpty(message = "position cannot be null") String position, @Size(max = 45) String phone, String isIdentified) {
+    }
+
+    public User(Long id, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
+        this.isIdentified = isIdentified;
     }
 
     public User(String firstName, String position) {
         this.firstName = firstName;
         this.position = position;
+    }
+
+    public User() {
     }
 }

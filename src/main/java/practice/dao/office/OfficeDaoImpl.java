@@ -31,11 +31,20 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public void update(Office office) {
-        Query query=em.createQuery("UPDATE Office SET id=?, name=?, address=?" +
-                "WHERE id=? AND version=?");
-        query.executeUpdate();
+    public long update(Long id, String name, String address, String phone, Boolean isActive) {
+        Office o = em.find(Office.class, id);
+        if (o == null) {
+            return 0;
+        }
+        o.setName(name);
+        o.setAddress(address);
+        o.setPhone(phone);
+        o.setActive(isActive);
+
+        em.flush();
+        return 1;
     }
+
 
     @Override
     public void save(Office office) {

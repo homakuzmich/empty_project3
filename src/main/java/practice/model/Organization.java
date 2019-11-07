@@ -134,6 +134,17 @@ public class Organization {
         this.isActive = isActive;
     }
 
+    public Organization(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+
     public void addOffice(Office office) {
         getOffices().add(office);
         office.getOrganizations().add(this);

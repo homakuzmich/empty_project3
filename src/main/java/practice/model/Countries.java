@@ -1,13 +1,14 @@
 package practice.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity(name="Countries")
 public class Countries {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="code")
     private Long code;
 
@@ -17,14 +18,11 @@ public class Countries {
     @Column(name="name",length = 45)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name="code")
     private User user;
 
     public Countries(@Size(max = 45) String name) {
-    }
-
-    public Countries(String name, String userId) {
     }
 
     public Long getCode() {
@@ -49,6 +47,9 @@ public class Countries {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Countries(@NotEmpty Long code, @Size(max = 45) String name) {
     }
 
     public Countries() {

@@ -31,10 +31,16 @@ public class CountriesDaoImpl implements CountriesDao {
     }
 
     @Override
-    public void update(Countries country) {
-        Query query= em.createQuery("UPDATE Countries SET name = ? WHERE code=? AND version=? ");
-        query.executeUpdate();
+    public long update(Long code, String name) {
+        Countries c = em.find(Countries.class, code);
+        if (c == null) {
+            return 0;
+        }
+        c.setName(name);
+        em.flush();
+        return 1;
     }
+
 
     @Override
     public void save(Countries country) {

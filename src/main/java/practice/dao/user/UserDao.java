@@ -9,7 +9,7 @@ public interface UserDao {
 
     User loadById(Long id);
 
-    void update(User user);
+    long update(Long id, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified);
 
     void save(User user);
 }
