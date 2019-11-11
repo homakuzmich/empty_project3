@@ -5,20 +5,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 import practice.Application;
 import practice.controller.CountriesController;
 import practice.dao.countries.CountriesDao;
-import practice.dao.user.UserDao;
-import practice.model.Countries;
-import practice.view.CountriesView;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
@@ -36,28 +35,16 @@ public class CountriesControllerTest {
     @Autowired
     private CountriesDao countriesDao;
 
+    @LocalServerPort
+    int serverPort = 8888;
+
     @Test
-    public void test() {
-        Countries country = new Countries();
-        country.setCode(5L);
-        country.setName("Австралия");
-        Set<Countries> list = new HashSet<>();
-        list.add(country);
-        Assert.assertNotNull(list);
-        Assert.assertEquals(1, list.size());
-
-        List<Countries> spisok = countriesDao.all();
-        spisok.add(country);
-        Assert.assertEquals(5, spisok.size());
-
-        CountriesView country2 = new CountriesView("Перу");
-        List<CountriesView> spisok2 = countriesController.list();
-        spisok2.add(country2);
-        Assert.assertNotNull(spisok2);
-        Assert.assertEquals(5, spisok2.size());
-
-        country2.setName("Малайзия");
-        country2.setCode(5L);
-        countriesController.countriesUpdate(country2);
+    public void test() throws URISyntaxException {
+        RestTemplate restTemplate = new RestTemplate();
+        final String baseUrl = "http://localhost:" + serverPort + "/countries";
+        URI uri = new URI(baseUrl);
+        ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+        Assert.assertEquals(true, result.getBody());
     }
 }
