@@ -65,6 +65,8 @@ public class DocsControllerTest {
             docsController.docsUpdate(nextDocument);
         } catch (MappingException e) {
             e.getLocalizedMessage();
+        } catch (Exception e) {
+            e.getMessage();
         }
 
     }

@@ -10,7 +10,7 @@ public interface DocsDao {
 
     Docs loadById(Long id);
 
-    long update(Long code, String name, Date date);
+    Docs update(Long code, String name, Date date) throws Exception;
 
     void save(Docs document);
 }

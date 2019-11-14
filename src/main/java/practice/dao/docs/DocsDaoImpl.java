@@ -33,15 +33,15 @@ public class DocsDaoImpl implements DocsDao {
     }
 
     @Override
-    public long update(Long code, String name, Date date) {
+    public Docs update(Long code, String name, Date date) throws Exception {
         Docs d = em.find(Docs.class, code);
         if (d == null) {
-            return 0;
+            throw new Exception("Документ не существует!");
         }
         d.setName(name);
         d.setDate(date);
         em.flush();
-        return 1;
+        return d;
     }
 
     @Override

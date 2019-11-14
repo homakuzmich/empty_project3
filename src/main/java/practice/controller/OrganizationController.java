@@ -52,7 +52,7 @@ public class OrganizationController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping(path = "/organization/{id}/update", consumes = "application/json", produces = "application/json")
-    public void organizationUpdate(@RequestBody OrganizationView organization) {
+    public void organizationUpdate(@RequestBody OrganizationView organization) throws Exception {
         organizationService.update(organization);
     }
 }

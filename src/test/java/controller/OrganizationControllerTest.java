@@ -60,7 +60,7 @@ public class OrganizationControllerTest {
             nextOrganization.setActive(true);
             organizationController.organizationUpdate(nextOrganization);
             organizationController.organizationAdd(nextOrganization);
-        } catch (MappingException e) {
+        } catch (Exception e) {
             e.getLocalizedMessage();
         }
     }

@@ -12,7 +12,7 @@ public interface UserService {
 
     List<UserView> users();
 
-    void update(@Valid UserView user);
+    void update(@Valid UserView user) throws Exception;
 
     UserView loadById(UserView user, Long id);
 }

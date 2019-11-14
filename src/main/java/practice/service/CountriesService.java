@@ -12,7 +12,7 @@ public interface CountriesService {
 
     List<CountriesView> countries();
 
-    void update(@Valid CountriesView country);
+    void update(@Valid CountriesView country) throws Exception;
 
     CountriesView loadById(CountriesView country, Long id);
 }

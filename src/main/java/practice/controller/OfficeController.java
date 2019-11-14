@@ -52,7 +52,7 @@ public class OfficeController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping(path = "/office/{id}/update", consumes = "application/json", produces = "application/json")
-    public void officeUpdate(@RequestBody OfficeView office) {
+    public void officeUpdate(@RequestBody OfficeView office) throws Exception {
         officeService.update(office);
     }
 

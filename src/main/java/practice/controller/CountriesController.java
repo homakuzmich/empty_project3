@@ -54,7 +54,7 @@ public class CountriesController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping(path = "/countries/{id}/update", consumes = "application/json", produces = "application/json")
-    public void countriesUpdate(@RequestBody CountriesView country) {
+    public void countriesUpdate(@RequestBody CountriesView country) throws Exception {
         countriesService.update(country);
     }
 

@@ -13,7 +13,7 @@ public interface DocsService {
 
     List<DocsView> documents();
 
-    void update(@Valid DocsView document);
+    void update(@Valid DocsView document) throws Exception;
 
     DocsView loadById(DocsView document, Long id);
 }

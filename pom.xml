@@ -35,13 +35,6 @@
             <version>1.0.2.Final</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>5.1.9.RELEASE</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
         <dependency>
             <groupId>javax</groupId>

@@ -32,7 +32,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<OfficeView> offices() {
         List<Office> all=dao.all();
         return mapperFacade.mapAsList(all, OfficeView.class);
@@ -40,7 +40,7 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     @Transactional
-    public void update(OfficeView view) {
+    public void update(OfficeView view) throws Exception {
         dao.update(view.id, view.name, view.address, view.phone, view.isActive);
     }
 

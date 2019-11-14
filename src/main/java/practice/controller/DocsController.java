@@ -53,7 +53,7 @@ public class DocsController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping(path = "/docs/{id}/update", consumes = "application/json", produces = "application/json")
-    public void docsUpdate(@RequestBody DocsView document) {
+    public void docsUpdate(@RequestBody DocsView document) throws Exception {
         docsService.update(document);
     }
 }

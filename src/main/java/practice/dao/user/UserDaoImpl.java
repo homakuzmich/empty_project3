@@ -1,8 +1,6 @@
 package practice.dao.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import practice.model.User;
 
@@ -32,22 +30,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public long update(Long id, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified) {
-        User u = em.find(User.class, id);
-        if (u == null) {
-            return 0;
+    public User update(Long id, String firstName, String lastName, String middleName, String position, String phone, Boolean isIdentified) throws Exception {
+        User user = em.find(User.class, id);
+        if (user == null) {
+            throw new Exception("Пользователь не существует!");
         }
-        u.setFirstName(firstName);
-        u.setLastName(lastName);
-        u.setMiddleName(middleName);
-        u.setPosition(position);
-        u.setPhone(phone);
-        u.setIdentified(isIdentified);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setMiddleName(middleName);
+        user.setPhone(phone);
+        user.setPosition(position);
+        user.setIdentified(isIdentified);
 
         em.flush();
-        return 1;
-
+        return user;
     }
+
 
     @Override
     public void save(User user) {

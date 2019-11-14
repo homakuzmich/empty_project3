@@ -31,10 +31,10 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public long update(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
+    public Organization update(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) throws Exception {
         Organization o = em.find(Organization.class, id);
         if (o == null) {
-            return 0;
+            throw new Exception("Организация не существует!");
         }
         o.setId(id);
         o.setName(name);
@@ -46,7 +46,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         o.setActive(isActive);
 
         em.flush();
-        return 1;
+        return o;
     }
 
     @Override

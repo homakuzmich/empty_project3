@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Office (
   phone                   VARCHAR(45) NULL                            COMMENT 'Телефон',
   is_active               TINYINT NULL DEFAULT 1                      COMMENT 'Активен',
 
-PRIMARY KEY (id),
+PRIMARY KEY (id)
 ) ;
 COMMENT ON TABLE Office IS 'Офис';
 

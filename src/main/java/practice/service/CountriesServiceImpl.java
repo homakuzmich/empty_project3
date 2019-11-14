@@ -31,7 +31,7 @@ public class CountriesServiceImpl implements CountriesService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<CountriesView> countries() {
         List<Countries> all=dao.all();
         return mapperFacade.mapAsList(all, CountriesView.class);
@@ -39,7 +39,7 @@ public class CountriesServiceImpl implements CountriesService {
 
     @Override
     @Transactional
-    public void update(CountriesView view) {
+    public void update(CountriesView view) throws Exception {
         dao.update(view.code, view.name);
     }
 

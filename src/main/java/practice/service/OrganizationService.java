@@ -12,7 +12,7 @@ public interface OrganizationService {
 
     List<OrganizationView> organizations();
 
-    void update(@Valid OrganizationView organization);
+    void update(@Valid OrganizationView organization) throws Exception;
 
     OrganizationView loadById(OrganizationView view, Long id);
 }

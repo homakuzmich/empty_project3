@@ -31,7 +31,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<OrganizationView> organizations() {
         List<Organization> all=dao.all();
         return mapperFacade.mapAsList(all, OrganizationView.class);
@@ -39,7 +39,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional
-    public void update(OrganizationView view) {
+    public void update(OrganizationView view) throws Exception {
         dao.update(view.id, view.name, view.fullName, view.inn, view.kpp, view.address, view.phone, view.isActive);
     }
 

@@ -9,7 +9,7 @@ public interface OrganizationDao {
 
     Organization loadById(Long id);
 
-    long update(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive);
+    Organization update(Long id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) throws Exception;
 
     void save(Organization organization);
 }

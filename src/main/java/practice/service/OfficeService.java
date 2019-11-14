@@ -12,7 +12,7 @@ public interface OfficeService {
 
     List<OfficeView> offices();
 
-    void update(@Valid OfficeView office);
+    void update(@Valid OfficeView office) throws Exception;
 
     OfficeView loadById(OfficeView office, Long id);
 }

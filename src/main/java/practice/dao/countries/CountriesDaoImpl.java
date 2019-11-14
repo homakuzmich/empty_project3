@@ -31,14 +31,14 @@ public class CountriesDaoImpl implements CountriesDao {
     }
 
     @Override
-    public long update(Long code, String name) {
+    public Countries update(Long code, String name) throws Exception {
         Countries c = em.find(Countries.class, code);
         if (c == null) {
-            return 0;
+            throw new Exception("Страна не существует!");
         }
         c.setName(name);
         em.flush();
-        return 1;
+        return c;
     }
 
 

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<UserView> users() {
         List<User> all = dao.all();
         return mapperFacade.mapAsList(all, UserView.class);
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void update(UserView view) {
+    public void update(UserView view) throws Exception {
         dao.update(view.id, view.firstName, view.lastName, view.middleName, view.position, view.phone, view.isIdentified);
     }
 

@@ -33,7 +33,7 @@ public class DocsServiceImpl implements DocsService {
     }
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional
     public List<DocsView> documents() {
         List<Docs> all=dao.all();
         return mapperFacade.mapAsList(all, DocsView.class);
@@ -41,7 +41,7 @@ public class DocsServiceImpl implements DocsService {
 
     @Override
     @Transactional
-    public void update(DocsView view) {
+    public void update(DocsView view) throws Exception {
         dao.update(view.code, view.name, view.date);
     }
 

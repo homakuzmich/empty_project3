@@ -31,10 +31,10 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public long update(Long id, String name, String address, String phone, Boolean isActive) {
+    public Office update(Long id, String name, String address, String phone, Boolean isActive) throws Exception {
         Office o = em.find(Office.class, id);
         if (o == null) {
-            return 0;
+            throw new Exception("Пользователь не существует!");
         }
         o.setName(name);
         o.setAddress(address);
@@ -42,7 +42,7 @@ public class OfficeDaoImpl implements OfficeDao {
         o.setActive(isActive);
 
         em.flush();
-        return 1;
+        return o;
     }
 
 

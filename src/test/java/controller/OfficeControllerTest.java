@@ -59,7 +59,7 @@ public class OfficeControllerTest {
             officeController.officeUpdate(office2);
             officeController.officeAdd(office2);
 
-        } catch (MappingException e) {
+        } catch (Exception e) {
             e.getLocalizedMessage();
         }
     }
